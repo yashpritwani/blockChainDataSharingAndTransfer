@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "aes": "nodemon aes.js",
+    "aes": "node aes.js",
+    "blowfish": "node blowfish.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yash",

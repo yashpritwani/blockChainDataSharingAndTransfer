@@ -38,10 +38,6 @@ async function decryptData(id) {
   });
 }
 
-// async function generatekey(id) {
-//   return crypto.createHash('sha512').update(id).digest('hex').substring(0, 32);
-// }
-
 async function generateIv(id) {
   return crypto.createHash('sha512').update(id).digest('hex').substring(0, 16);
 }

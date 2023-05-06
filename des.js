@@ -38,7 +38,7 @@ async function decryptData(id) {
 // }
 
 async function generateIv(id) {
-  return crypto.createHash('sha512').update(id).digest('hex').substring(0, 8);
+  return crypto.createHash('sha512').update(id).digest('hex').substring(0, 16);
 }
 
 // encryptData("hye");

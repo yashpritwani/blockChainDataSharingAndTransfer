@@ -10,7 +10,7 @@ async function encryptData(fileName) {
   let hash = await generateIv(id);
   const cipher = crypto.createCipheriv(ecnryption_method, id, hash)
   let encrypted = Buffer.from(cipher.update(data, 'utf8', 'hex') + cipher.final('hex'));
-  return fs.writeFile(`${id}.txt`, encrypted, (err) => {
+  return fs.writeFile(`${hash}.txt`, encrypted, (err) => {
     if (err)
       console.log(err);
     else {
@@ -23,13 +23,19 @@ async function encryptData(fileName) {
 
 // Decrypt data
 async function decryptData(id) {
-  let encryptedData = fs.readFileSync(`${id}.txt`);
-  const buff = Buffer.from(encryptedData, 'base64');
   let hash = await generateIv(id);
+  let encryptedData = fs.readFileSync(`${hash}.txt`);
+  const buff = Buffer.from(encryptedData, 'base64');
   const decipher = crypto.createDecipheriv(ecnryption_method, id, hash)
   let decryptedData = decipher.update(buff.toString('utf8'), 'hex', 'utf8') +  decipher.final('utf8');
-  console.log(decryptedData);
-  return decryptedData;
+  return fs.writeFile(`${id}-decrypt.txt`, decryptedData, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log(decryptedData);
+      return decryptedData;
+    }
+  });
 }
 
 // async function generatekey(id) {
@@ -40,5 +46,5 @@ async function generateIv(id) {
   return crypto.createHash('sha512').update(id).digest('hex').substring(0, 16);
 }
 
-// encryptData("hye");
-// decryptData("ab41390b6a0767c4f3016ffe3a88a3a2");
+// encryptData("random");
+decryptData("52eaeb74bd4e8e5b5319bbd56c725250");

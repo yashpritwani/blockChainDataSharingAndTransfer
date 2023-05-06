@@ -46,5 +46,5 @@ async function generateIv(id) {
   return crypto.createHash('sha512').update(id).digest('hex').substring(0, 16);
 }
 
-// encryptData("random");
-decryptData("52eaeb74bd4e8e5b5319bbd56c725250");
+encryptData("hye");
+// decryptData("0d69ba1145ee1de2f1f751d15e59dcf7");
